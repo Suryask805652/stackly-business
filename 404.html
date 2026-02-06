@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | 404 Error - StackLy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #5a67d8;
+            --primary-dark: #4c51bf;
+            --secondary: #f56565;
+            --accent: #ed8936;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray: #718096;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.5;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* MOBILE-FIRST CONTAINER */
+        .container {
+            width: 100%;
+            padding-left: 16px;
+            padding-right: 16px;
+            margin: 0 auto;
+        }
+
+        /* MOBILE-FIRST NAVIGATION */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        /* MOBILE MENU */
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 5px;
+            display: block;
+        }
+
+        .nav-links {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .nav-links.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .nav-links li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        /* MOBILE-FIRST 404 CONTENT */
+        .error-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 0 60px;
+        }
+
+        .error-container {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .error-number {
+            font-size: 8rem;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .error-message {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* MOBILE BUTTONS */
+        .error-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* MOBILE SEARCH */
+        .error-search {
+            margin-bottom: 3rem;
+        }
+
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .search-box input {
+            padding: 14px 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .search-btn {
+            padding: 14px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* MOBILE LINK CARDS */
+        .error-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .link-card {
+            background: white;
+            border-radius: 10px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .link-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .link-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .link-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* MOBILE FOOTER */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .footer-logo .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .footer-logo .logo span {
+            color: var(--secondary);
+        }
+
+        .footer-logo p {
+            color: #d1d6db;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-links h4,
+        .footer-social h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: #a0aec0;
+            text-decoration: none;
+        }
+
+        /* TABLET STYLES (min-width: 768px) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .error-number {
+                font-size: 10rem;
+            }
+
+            .error-title {
+                font-size: 2.2rem;
+            }
+
+            .error-message {
+                font-size: 1.1rem;
+            }
+
+            .error-actions {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .error-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .link-card {
+                flex: 1;
+                min-width: calc(50% - 20px);
+            }
+
+            .search-box {
+                flex-direction: row;
+            }
+
+            .search-box input {
+                flex: 1;
+            }
+
+            .search-btn {
+                width: auto;
+                min-width: 120px;
+            }
+
+            /* Tablet Navigation */
+            .menu-toggle {
+                display: none;
+            }
+
+            .nav-links {
+                position: static;
+                display: flex;
+                transform: none;
+                opacity: 1;
+                background: transparent;
+                box-shadow: none;
+                width: auto;
+            }
+
+            .nav-links li {
+                border: none;
+            }
+
+            .nav-links a {
+                padding: 8px 16px;
+            }
+
+            .nav-links a:hover {
+                background: transparent;
+            }
+
+            /* Tablet Footer */
+            .footer-content {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .footer-logo {
+                flex: 1;
+                min-width: 100%;
+            }
+
+            .footer-links,
+            .footer-social {
+                flex: 1;
+                min-width: calc(50% - 30px);
+            }
+        }
+
+        /* DESKTOP STYLES (min-width: 992px) */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .error-number {
+                font-size: 12rem;
+            }
+
+            .error-title {
+                font-size: 2.5rem;
+            }
+
+            .error-links {
+                gap: 30px;
+            }
+
+            .link-card {
+                flex: 1;
+                min-width: calc(33.333% - 30px);
+            }
+
+            /* Desktop Navigation */
+            .nav-links {
+                gap: 10px;
+            }
+
+            /* Desktop Footer */
+            .footer-logo {
+                flex: 2;
+                min-width: 0;
+            }
+
+            .footer-links,
+            .footer-social {
+                flex: 1;
+                min-width: 0;
+            }
+        }
+
+        /* LARGE DESKTOP (min-width: 1200px) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+
+            .error-number {
+                font-size: 15rem;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* UTILITY CLASSES */
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Stack<span>Ly</span></a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="404.html">Services</a></li>
+                <li><a href="404.html">Solutions</a></li>
+                <li><a href="404.html">About</a></li>
+                <li><a href="404.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 404 Content -->
+    <main class="error-content">
+        <div class="container error-container">
+            <h1 class="error-number fade-in">404</h1>
+            <h2 class="error-title fade-in delay-1">Page Not Found</h2>
+            <p class="error-message fade-in delay-2">
+                Oops! The page you're looking for seems to have wandered off into the digital void. 
+                But don't worry - we're here to help you find your way back.
+            </p>
+            
+            <div class="error-actions fade-in delay-2">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="index.html#contact" class="btn btn-outline">
+                    <i class="fas fa-headset"></i> Get Help
+                </a>
+            </div>
+
+            <div class="error-search fade-in delay-3">
+                <p class="mb-2">Search for what you need:</p>
+                <div class="search-box">
+                    <input type="text" placeholder="Type your search here..." id="searchInput">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+
+            <div class="error-links">
+                <div class="link-card fade-in delay-1">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Business Strategy</h3>
+                    <p>Discover strategic planning services to optimize your business growth and direction.</p>
+                    <a href="404.html" class="btn btn-small btn-primary">Learn More</a>
+                </div>
+                
+                <div class="link-card fade-in delay-2">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Digital Solutions</h3>
+                    <p>Transform operations with our cutting-edge technology services and digital solutions.</p>
+                    <a href="404.html" class="btn btn-small btn-primary">Explore</a>
+                </div>
+                
+                <div class="link-card fade-in delay-3">
+                    <i class="fas fa-book"></i>
+                    <h3>Resources</h3>
+                    <p>Access our library of business resources, case studies, and implementation guides.</p>
+                    <a href="404.html" class="btn btn-small btn-outline">Browse</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" class="logo">Stack<span>Ly</span></a>
+                    <p>Transforming businesses through innovative solutions and technology expertise.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="404.html">Services</a></li>
+                        <li><a href="404.html">Solutions</a></li>
+                        <li><a href="404.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="404.html" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="404.html" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="404.html" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="404.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 StackLy. All rights reserved. | 
+                    <a href="404.html">Privacy Policy</a> | 
+                    <a href="404.html">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                });
+            }
+            
+            // Close mobile menu when clicking links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    if (menuToggle) {
+                        menuToggle.querySelector('i').classList.add('fa-bars');
+                        menuToggle.querySelector('i').classList.remove('fa-times');
+                    }
+                });
+            });
+            
+            // Search Functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            function handleSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    // Show loading state
+                    const originalText = searchBtn.innerHTML;
+                    searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+                    searchBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        // Reset button
+                        searchBtn.innerHTML = originalText;
+                        searchBtn.disabled = false;
+                        
+                        // Simple search logic
+                        const searchTerms = query.toLowerCase();
+                        if (searchTerms.includes('service') || searchTerms.includes('solution')) {
+                            window.location.href = 'index.html#services';
+                        } else if (searchTerms.includes('contact') || searchTerms.includes('help')) {
+                            window.location.href = 'index.html#contact';
+                        } else if (searchTerms.includes('about') || searchTerms.includes('team')) {
+                            window.location.href = 'index.html#about';
+                        } else {
+                            alert(`No results found for "${query}". Try searching for: services, contact, or about.`);
+                        }
+                    }, 800);
+                } else {
+                    searchInput.focus();
+                    alert('Please enter a search term.');
+                }
+            }
+            
+            if (searchBtn) {
+                searchBtn.addEventListener('click', handleSearch);
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleSearch();
+                    }
+                });
+            }
+            
+            // Close mobile menu on window resize (if resized to desktop)
+            function handleResize() {
+                if (window.innerWidth >= 768) {
+                    navLinks.classList.remove('active');
+                    if (menuToggle) {
+                        menuToggle.querySelector('i').classList.add('fa-bars');
+                        menuToggle.querySelector('i').classList.remove('fa-times');
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            
+            // Add click-outside to close mobile menu
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navLinks.contains(event.target) || menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    if (menuToggle) {
+                        menuToggle.querySelector('i').classList.add('fa-bars');
+                        menuToggle.querySelector('i').classList.remove('fa-times');
+                    }
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || !href.startsWith('#')) return;
+                    
+                    if (window.location.pathname.includes('404.html')) {
+                        e.preventDefault();
+                        window.location.href = `index.html${href}`;
+                    }
+                });
+            });
+            
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all elements with fade-in class
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
